@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.5473894436519258,
+        "y": 2.514707560627676
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.2973894436519258,
+        "y": 2.514707560627676
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.616,
+        "y": 2.514707560627676
+      },
+      "prevControl": {
+        "x": 2.866,
+        "y": 2.514707560627676
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "\"RBump Step Back\" End"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 43.6980473274211
+  },
+  "reversed": false,
+  "folder": "Paths that skip 8 shot",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": true
+}

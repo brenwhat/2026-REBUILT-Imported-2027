@@ -39,6 +39,7 @@ import org.wpilib.networktables.StructPublisher;
 import org.wpilib.util.sendable.Sendable;
 import org.wpilib.util.sendable.SendableBuilder;
 import org.wpilib.driverstation.DriverStation;
+import org.wpilib.driverstation.MatchState;
 import org.wpilib.hardware.accelerometer.ADXL345_I2C.AllAxes;
 import org.wpilib.driverstation.Alliance;
 import org.wpilib.smartdashboard.Field2d;
@@ -168,7 +169,7 @@ public abstract class DriveTrain extends SubsystemBase {
             new PIDConstants(Constants.Auto.rotation_kP, Constants.Auto.rotation_kI, Constants.Auto.rotation_kD)),
         config,
         () -> {
-          Optional<Alliance> alliance = DriverStation.getAlliance();  // this method should exist
+          Optional<Alliance> alliance = MatchState.getAlliance();  // this method should exist
           if (alliance.isPresent()) {
             boolean red = alliance.get() == Alliance.RED;
             if (red) {
@@ -448,7 +449,7 @@ public abstract class DriveTrain extends SubsystemBase {
   }
 
   public boolean refreshAlliance() {
-    Optional<Alliance> alliance = DriverStation.getAlliance();
+    Optional<Alliance> alliance = MatchState.getAlliance();
     if (alliance.isPresent()) {
       blueAlliance = !(alliance.get() == Alliance.RED);
     } // else {blueAlliance = false;}

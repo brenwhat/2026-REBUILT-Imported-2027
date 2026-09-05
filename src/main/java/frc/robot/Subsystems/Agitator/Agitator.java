@@ -1,7 +1,9 @@
 package frc.robot.Subsystems.Agitator;
 
 import com.ctre.phoenix6.configs.Slot0Configs;
+import com.revrobotics.PersistMode;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel;
@@ -32,7 +34,7 @@ public class Agitator extends SubsystemBase {
 
     public Agitator() {
         // TODO motors need canbus number
-        agitatorMotor = new SparkMax(Port.AGITATOR_MOTOR, MotorType.kBrushless);
+        agitatorMotor = new SparkMax(0, Port.AGITATOR_MOTOR, MotorType.kBrushless);
         agitatorMotorConfig = new SparkMaxConfig();
         agitatorEncoderConfig = new AlternateEncoderConfig();  
         agitatorMotorConfig.idleMode(SparkMaxConfig.IdleMode.kCoast)
@@ -41,7 +43,7 @@ public class Agitator extends SubsystemBase {
         agitatorEncoderConfig.apply(agitatorEncoderConfig);
         agitatorEncoder = agitatorMotor.getEncoder();
         
-        gateMotor = new SparkMax(Port.SHOOTER_GATE_MOTOR, MotorType.kBrushless);
+        gateMotor = new SparkMax(0, Port.SHOOTER_GATE_MOTOR, MotorType.kBrushless);
         gateMotorConfig = new SparkMaxConfig();
         gateEncoderConfig = new AlternateEncoderConfig();  
         gateMotorConfig.idleMode(SparkMaxConfig.IdleMode.kCoast)
@@ -50,11 +52,11 @@ public class Agitator extends SubsystemBase {
         gateEncoderConfig.apply(gateEncoderConfig);
         gateEncoder = gateMotor.getEncoder();
 
-        gateMotorConfig.closedLoop.pidf(0.0006, 0, 0, 6).outputRange(-1, 1);
-        agitatorMotorConfig.closedLoop.pidf(0.0006, 0, 0, 6).outputRange(-1, 1);
+        gateMotorConfig.closedLoop.pid(0.0006, 0, 0).outputRange(-1, 1);
+        agitatorMotorConfig.closedLoop.pid(0.0006, 0, 0).outputRange(-1, 1);
         //gateEncoder.setPosition(0);
-        gateMotor.configure(gateMotorConfig, ResetMode.kResetSafeParameters, SparkMax.PersistMode.kPersistParameters);
-        agitatorMotor.configure(agitatorMotorConfig, SparkMax.ResetMode.kResetSafeParameters, SparkMax.PersistMode.kPersistParameters);
+        gateMotor.configure(gateMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        agitatorMotor.configure(agitatorMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
     public void runAgitation(int mult) {
@@ -82,9 +84,9 @@ public class Agitator extends SubsystemBase {
     public void periodic() {
         // optional telemetry:
         super.periodic();
-        SmartDashboard.putNumber("Agitator Current", agitatorMotor.getOutputCurrent());
-        SmartDashboard.putNumber("Gate Current", gateMotor.getOutputCurrent());
-        SmartDashboard.putNumber("Agitator Velocity", agitatorEncoder.getVelocity());
-        SmartDashboard.putNumber("Gate Velocity", gateEncoder.getVelocity());
+        // SmartDashboard.putNumber("Agitator Current", agitatorMotor.getOutputCurrent());
+        // SmartDashboard.putNumber("Gate Current", gateMotor.getOutputCurrent());
+        // SmartDashboard.putNumber("Agitator Velocity", agitatorEncoder.getVelocity());
+        // SmartDashboard.putNumber("Gate Velocity", gateEncoder.getVelocity());
     }
 }

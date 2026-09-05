@@ -14,6 +14,7 @@ import java.util.Optional;
 
 import org.wpilib.driverstation.Alliance;
 import org.wpilib.driverstation.DriverStation;
+import org.wpilib.driverstation.MatchState;
 import org.wpilib.smartdashboard.SmartDashboard;
 
 public class DriveTrainRealIO extends DriveTrain {
@@ -28,7 +29,7 @@ public class DriveTrainRealIO extends DriveTrain {
   public void refreshGyro() {
     if (gyro !=  null) {
       boolean blueAlliance;
-      Optional<Alliance> alliance = DriverStation.getAlliance();
+      Optional<Alliance> alliance = MatchState.getAlliance();
           if (alliance.isPresent()) {
             blueAlliance = !(alliance.get() == Alliance.RED);
           } else {blueAlliance = false;}

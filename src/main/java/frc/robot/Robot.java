@@ -11,6 +11,7 @@ import com.pathplanner.lib.commands.FollowPathCommand;
 
 import org.wpilib.math.util.Units;
 import org.wpilib.driverstation.DriverStation;
+import org.wpilib.driverstation.MatchState;
 import org.wpilib.framework.TimedRobot;
 import org.wpilib.smartdashboard.SmartDashboard;
 import org.wpilib.command2.Command;
@@ -37,7 +38,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     //LimelightHelpers.SetIMU("limelight", 1);
     m_robot_container.updateShooterDistance();
-    SmartDashboard.putNumber("Match Time", DriverStation.getMatchTime());
+    SmartDashboard.putNumber("Match Time", MatchState.getMatchTime());
     SmartDashboard.putBoolean("Hub Active", m_hubTimer.isHubActive());
     SmartDashboard.putNumber("Shift Time", m_hubTimer.getRemainingHubShift());
     CommandScheduler.getInstance().run();

@@ -2,6 +2,7 @@ package frc.robot.Subsystems.Shooter;
 
 import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 
+import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.Slot2Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -13,6 +14,8 @@ import com.ctre.phoenix6.signals.MotorAlignmentValue;
 
 import org.wpilib.smartdashboard.SmartDashboard;
 import org.wpilib.command2.SubsystemBase;
+import org.wpilib.hardware.motor.Talon;
+
 import frc.robot.RobotUtils;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.Port;
@@ -36,9 +39,11 @@ public class Shooter extends SubsystemBase {
     private double bottomRollerTargetRPS = -25; //-22.5
     private double topRollerTargetRPS = 85;
 
-    private TalonFX farBottomRollerMotor = new TalonFX(Port.FAR_SHOOTER_BOTTOM_ROLLER_MOTOR);
-    private TalonFX nearBottomRollerMotor = new TalonFX(Port.NEAR_SHOOTER_BOTTOM_ROLLER_MOTOR);
-    private TalonFX topRollerMotor = new TalonFX(Port.SHOOTER_TOP_ROLLER_MOTOR);
+    // TODO: get canbus number for the talons
+    private CANBus canBus0 = new CANBus();
+    private TalonFX farBottomRollerMotor = new TalonFX(Port.FAR_SHOOTER_BOTTOM_ROLLER_MOTOR, canBus0);
+    private TalonFX nearBottomRollerMotor = new TalonFX(Port.NEAR_SHOOTER_BOTTOM_ROLLER_MOTOR, canBus0);
+    private TalonFX topRollerMotor = new TalonFX(Port.SHOOTER_TOP_ROLLER_MOTOR, canBus0);
 
     public boolean enabled = false;
     public boolean autoDistance = true;

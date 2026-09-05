@@ -6,6 +6,7 @@ package frc.robot.Subsystems.DriveTrain;
 
 import static org.wpilib.units.Units.Degrees;
 
+import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionVoltage;
@@ -37,9 +38,9 @@ public class SwerveModuleRealIO extends SwerveModule{
   public CANcoder steer_sensor;
 
   public SwerveModuleRealIO(int drive_port, int steer_port, int sensor_port){
-    drive_motor = new TalonFX(drive_port,"CANivore");  // TODO add canbus numbers
-    steer_motor = new TalonFX(steer_port,"CANivore");
-    steer_sensor = new CANcoder(sensor_port,"CANivore");
+    drive_motor = new TalonFX(drive_port,CANBus.systemcore(4));  // TODO add canbus numbers
+    steer_motor = new TalonFX(steer_port,CANBus.systemcore(4));
+    steer_sensor = new CANcoder(sensor_port,CANBus.systemcore(4));
     steerPortVar = steer_port;
     
     TalonFXConfiguration drive_configs = new TalonFXConfiguration();

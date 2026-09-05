@@ -3,8 +3,13 @@ package frc.robot.util;
 import java.util.Optional;
 
 import org.wpilib.driverstation.DriverStation;
-import org.wpilib.driverstation.DriverStation.Alliance;
+import org.wpilib.driverstation.MatchState;
+import org.wpilib.driverstation.RobotState;
+import org.wpilib.driverstation.Alliance;
 import org.wpilib.smartdashboard.SmartDashboard;
+
+import frc.robot.Constants.Robot;
+
 import org.wpilib.command2.InstantCommand;
 import org.wpilib.command2.SequentialCommandGroup;
 import org.wpilib.command2.WaitCommand;
@@ -22,23 +27,23 @@ public HubTimer() {
 }
 
 public boolean isHubActive() {
-  Optional<Alliance> alliance = DriverStation.getAlliance();
+  Optional<Alliance> alliance = MatchState.getAlliance();
   // If we have no alliance, we cannot be enabled, therefore no hub.
   if (alliance.isEmpty()) {
     return false;
   }
   // Hub is always enabled in autonomous.
-  if (DriverStation.isAutonomousEnabled()) {
+  if (RobotState.isAutonomousEnabled()) {
     return true;
   }
   // At this point, if we're not teleop enabled, there is no hub.
-  if (!DriverStation.isTeleopEnabled()) {
+  if (!RobotState.isTeleopEnabled()) {
     return false;
   }
 
   // We're teleop enabled, compute.
-  double matchTime = DriverStation.getMatchTime();
-  String gameData = DriverStation.getGameSpecificMessage();
+  double matchTime = MatchState.getMatchTime();
+  String gameData = MatchState.getGameData();
   // If we have no game data, we cannot compute, assume hub is active, as its likely early in teleop.
   if (gameData.isEmpty()) {
     return true;

@@ -34,6 +34,8 @@ import org.wpilib.driverstation.DriverStation;
 //import frc.robot.commands.ExampleCommand;
 //import frc.robot.commands.IntakeCommand.ToggleIntake;
 import org.wpilib.driverstation.Joystick;
+import org.wpilib.driverstation.MatchState;
+import org.wpilib.driverstation.RobotState;
 import org.wpilib.smartdashboard.SendableChooser;
 import org.wpilib.smartdashboard.SmartDashboard;
 import org.wpilib.command2.Command;
@@ -45,7 +47,6 @@ import org.wpilib.command2.RunCommand;
 import org.wpilib.command2.SequentialCommandGroup;
 import org.wpilib.command2.StartEndCommand;
 import org.wpilib.command2.WaitCommand;
-import org.wpilib.command2.button.CommandXboxController;
 import org.wpilib.command2.button.JoystickButton;
 import org.wpilib.command2.button.Trigger;
 import org.wpilib.command2.button.JoystickButton;
@@ -238,7 +239,7 @@ public class RobotContainer {
   }
 
   public void autoAlignSwerve() {
-    if (DriverStation.isAutonomous() && autoAlignHub) {
+    if (RobotState.isAutonomous() && autoAlignHub) {
         double angle_radiansPerSecond;
         angle_radiansPerSecond = m_drive.getTurnToHub(); //* (m_limelightio.blueAlliance == true ? 1 : -1);
 
@@ -252,7 +253,7 @@ public class RobotContainer {
   }
 
   public void updateSwerve() {
-    if (!DriverStation.isAutonomous() && !lockSwerve){
+    if (!RobotState.isAutonomous() && !lockSwerve){
     double driveMult = 1.25; //change this constant to change the drive speed.
     double rotationMult = 1.5; //change this constant to change the turn speed.
     
@@ -299,8 +300,7 @@ public class RobotContainer {
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
    * predicate, or via the named factories in {@link
-   * org.wpilib.command2.button.CommandGenericHID}'s subclasses for {@link
-   * CommandXboxController Xbox}/{@link org.wpilib.command2.button.CommandPS4Controller
+   * org.wpilib.command2.button.CommandGenericHID}'s subclasses for/{@link org.wpilib.command2.button.CommandPS4Controller
    * PS4} controllers or {@link org.wpilib.command2.button.CommandJoystick Flight
    * joysticks}
    */
